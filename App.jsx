@@ -1,21 +1,8 @@
-import React, { useCallback, useRef } from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import BottomSheet from './components/BottomSheet';
+import React from 'react';
 import { StatusBar } from 'react-native';
+// import BottomSheetRoot from './modules/BottomSheet';
 
 export default function App() {
-  const ref = useRef(null);
-
-  const onPress = useCallback(() => {
-    const isActive = ref?.current?.isActive();
-    if (isActive) {
-      ref?.current?.scrollTo(0);
-    } else {
-      ref?.current?.scrollTo(-200);
-    }
-  }, []);
-
   return (
     <>
       <StatusBar
@@ -24,37 +11,7 @@ export default function App() {
         backgroundColor="transparent"
       />
 
-      <GestureHandlerRootView style={styles.flex}>
-        <View style={styles.container}>
-          <TouchableOpacity style={styles.button} onPress={onPress} />
-          <BottomSheet ref={ref}>
-            <View style={styles.sheetContentContainer} />
-          </BottomSheet>
-        </View>
-      </GestureHandlerRootView>
+      {/* <BottomSheetRoot /> */}
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  flex: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#111',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  button: {
-    height: 50,
-    borderRadius: 25,
-    aspectRatio: 1,
-    backgroundColor: 'white',
-    opacity: 0.6,
-  },
-  sheetContentContainer: {
-    flex: 1,
-    backgroundColor: 'orange',
-  },
-});
