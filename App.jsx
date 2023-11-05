@@ -1,6 +1,6 @@
-import React, {useCallback, useRef} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import React, { useCallback, useRef } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet from './components/BottomSheet';
 
 export default function App() {

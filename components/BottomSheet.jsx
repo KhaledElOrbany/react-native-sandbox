@@ -17,7 +17,7 @@ const BottomSheet = React.forwardRef(({ children }, ref) => {
   const translateY = useSharedValue(0);
   const active = useSharedValue(false);
 
-  const scrollTo = useCallback(destination => {
+  const scrollTo = useCallback((destination) => {
     'worklet';
     active.value = destination !== 0;
 
@@ -30,14 +30,17 @@ const BottomSheet = React.forwardRef(({ children }, ref) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useImperativeHandle(ref, () => ({ scrollTo, isActive }), [scrollTo, isActive]);
+  useImperativeHandle(ref, () => ({ scrollTo, isActive }), [
+    scrollTo,
+    isActive,
+  ]);
 
   const context = useSharedValue({ y: 0 });
   const gesture = Gesture.Pan()
     .onStart(() => {
       context.value = { y: translateY.value };
     })
-    .onUpdate(event => {
+    .onUpdate((event) => {
       translateY.value = event.translationY + context.value.y;
       translateY.value = Math.max(translateY.value, MAX_TRANSLATE_Y);
     })
