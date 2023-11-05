@@ -1,45 +1,51 @@
-import React, {useCallback, useMemo, useRef} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import BottomSheet from '@gorhom/bottom-sheet';
-import {
-  GestureHandlerRootView,
-  PanGestureHandler,
-} from 'react-native-gesture-handler';
+import React, {useCallback, useRef} from 'react';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import BottomSheet from './components/BottomSheet';
 
-const App = () => {
-  const bottomSheetRef = useRef(null);
-  const snapPoints = useMemo(() => ['10%', '50%', '75%'], []);
+export default function App() {
+  const ref = useRef(null);
 
-  const handleSheetChanges = useCallback(index => {}, []);
+  const onPress = useCallback(() => {
+    const isActive = ref?.current?.isActive();
+    if (isActive) {
+      ref?.current?.scrollTo(0);
+    } else {
+      ref?.current?.scrollTo(-200);
+    }
+  }, []);
 
   return (
-    <GestureHandlerRootView style={styles.container}>
-      <PanGestureHandler>
-        <View style={styles.container}>
-          <BottomSheet
-            ref={bottomSheetRef}
-            index={1}
-            snapPoints={snapPoints}
-            enablePanDownToClose={false}
-            onChange={handleSheetChanges}>
-            <View style={styles.contentContainer}>
-              <Text>Awesome 🎉</Text>
-            </View>
-          </BottomSheet>
-        </View>
-      </PanGestureHandler>
+    <GestureHandlerRootView style={styles.flex}>
+      <View style={styles.container}>
+        <TouchableOpacity style={styles.button} onPress={onPress} />
+        <BottomSheet ref={ref}>
+          <View style={styles.sheetContentContainer} />
+        </BottomSheet>
+      </View>
     </GestureHandlerRootView>
   );
-};
+}
 
 const styles = StyleSheet.create({
+  flex: {
+    flex: 1,
+  },
   container: {
     flex: 1,
-    backgroundColor: 'grey',
-  },
-  contentContainer: {
+    backgroundColor: '#111',
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  button: {
+    height: 50,
+    borderRadius: 25,
+    aspectRatio: 1,
+    backgroundColor: 'white',
+    opacity: 0.6,
+  },
+  sheetContentContainer: {
+    flex: 1,
+    backgroundColor: 'orange',
   },
 });
-
-export default App;
