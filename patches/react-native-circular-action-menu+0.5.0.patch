@@ -1,0 +1,20 @@
+diff --git a/node_modules/react-native-circular-action-menu/ActionButton.js b/node_modules/react-native-circular-action-menu/ActionButton.js
+index eb64e59..1521b2a 100644
+--- a/node_modules/react-native-circular-action-menu/ActionButton.js
++++ b/node_modules/react-native-circular-action-menu/ActionButton.js
+@@ -83,6 +83,7 @@ export default class ActionButton extends Component {
+     Animated.spring(this.state.anim, {
+       toValue: 1,
+       duration: 250,
++      useNativeDriver: false,
+     }).start();
+ 
+     this.setState({ active: true });
+@@ -92,6 +93,7 @@ export default class ActionButton extends Component {
+     Animated.spring(this.state.anim, {
+       toValue: 0,
+       duration: 250,
++      useNativeDriver: false,
+     }).start();
+ 
+     setTimeout(() => {
