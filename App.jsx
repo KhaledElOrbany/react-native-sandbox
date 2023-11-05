@@ -2,6 +2,7 @@ import React, { useCallback, useRef } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet from './components/BottomSheet';
+import { StatusBar } from 'react-native';
 
 export default function App() {
   const ref = useRef(null);
@@ -16,14 +17,22 @@ export default function App() {
   }, []);
 
   return (
-    <GestureHandlerRootView style={styles.flex}>
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.button} onPress={onPress} />
-        <BottomSheet ref={ref}>
-          <View style={styles.sheetContentContainer} />
-        </BottomSheet>
-      </View>
-    </GestureHandlerRootView>
+    <>
+      <StatusBar
+        translucent
+        barStyle="dark-content"
+        backgroundColor="transparent"
+      />
+
+      <GestureHandlerRootView style={styles.flex}>
+        <View style={styles.container}>
+          <TouchableOpacity style={styles.button} onPress={onPress} />
+          <BottomSheet ref={ref}>
+            <View style={styles.sheetContentContainer} />
+          </BottomSheet>
+        </View>
+      </GestureHandlerRootView>
+    </>
   );
 }
 
