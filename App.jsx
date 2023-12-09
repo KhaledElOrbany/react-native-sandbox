@@ -1,18 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import {
-  KeyboardAvoidingView,
   StyleSheet,
   Text,
   View,
-  TextInput,
   TouchableOpacity,
-  Keyboard,
   ScrollView,
-  Platform,
 } from 'react-native';
 import Task from './modules/Task';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const orders = [
+const tempOrders = [
   {
     id: 53,
     name: 'ISSUED',
@@ -34,19 +31,20 @@ const orders = [
 ];
 
 export default function App() {
-  const [task, setTask] = useState();
-  const [taskItems, setTaskItems] = useState([]);
+  const [orders, setOrders] = React.useState([]);
 
-  const handleAddTask = () => {
-    Keyboard.dismiss();
-    setTaskItems([...taskItems, task]);
-    setTask(null);
-  };
+  useEffect(() => {
+    const getOrders = async () => {
+      if (await AsyncStorage.getItem('orders')) {
+        await AsyncStorage.setItem('orders', JSON.stringify(tempOrders));
+        setOrders(tempOrders);
+      }
+    };
+    getOrders();
+  }, []);
 
-  const completeTask = (index) => {
-    let itemsCopy = [...taskItems];
-    itemsCopy.splice(index, 1);
-    setTaskItems(itemsCopy);
+  const completeOrder = async (index) => {
+    // here
   };
 
   return (
@@ -61,7 +59,7 @@ export default function App() {
               return (
                 <TouchableOpacity
                   key={index}
-                  onPress={() => completeTask(index)}>
+                  onPress={() => completeOrder(index)}>
                   <Task item={item} />
                 </TouchableOpacity>
               );
@@ -70,7 +68,7 @@ export default function App() {
         </View>
       </ScrollView>
 
-      <KeyboardAvoidingView
+      {/* <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.writeTaskWrapper}>
         <TextInput
@@ -84,7 +82,7 @@ export default function App() {
             <Text style={styles.addText}>+</Text>
           </View>
         </TouchableOpacity>
-      </KeyboardAvoidingView>
+      </KeyboardAvoidingView> */}
     </View>
   );
 }
@@ -95,7 +93,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E8EAED',
   },
   tasksWrapper: {
-    paddingTop: 80,
+    paddingTop: 32,
     paddingHorizontal: 20,
   },
   sectionTitle: {
