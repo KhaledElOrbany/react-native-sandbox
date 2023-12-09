@@ -19,6 +19,18 @@ const orders = [
     order_status_id: 1,
     trip_id: 30,
   },
+  {
+    id: 54,
+    name: 'ISSUED',
+    order_status_id: 1,
+    trip_id: 30,
+  },
+  {
+    id: 55,
+    name: 'ISSUED',
+    order_status_id: 1,
+    trip_id: 30,
+  },
 ];
 
 export default function App() {
@@ -45,12 +57,12 @@ export default function App() {
         <View style={styles.tasksWrapper}>
           <Text style={styles.sectionTitle}>Today's tasks</Text>
           <View style={styles.items}>
-            {taskItems.map((item, index) => {
+            {orders.map((item, index) => {
               return (
                 <TouchableOpacity
                   key={index}
                   onPress={() => completeTask(index)}>
-                  <Task text={item} />
+                  <Task item={item} />
                 </TouchableOpacity>
               );
             })}

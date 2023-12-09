@@ -1,12 +1,21 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const Task = (props) => {
+const Task = ({ item }) => {
+  const { id, name, order_status_id, trip_id } = item;
   return (
     <View style={styles.item}>
       <View style={styles.itemLeft}>
         <View style={styles.square} />
-        <Text style={styles.itemText}>{props.text}</Text>
+        <Text style={styles.itemText}>
+          <Text>
+            Trip: {trip_id} | Order: {id}
+          </Text>
+          <Text>{'\n'}</Text>
+          <Text>
+            Status: {name} | Order Num: {order_status_id}
+          </Text>
+        </Text>
       </View>
       <View style={styles.circular} />
     </View>
@@ -31,20 +40,21 @@ const styles = StyleSheet.create({
   square: {
     width: 24,
     height: 24,
-    backgroundColor: '#55BCF6',
     opacity: 0.4,
-    borderRadius: 5,
     marginRight: 15,
+    borderRadius: 5,
+    backgroundColor: '#55BCF6',
   },
   itemText: {
-    maxWidth: '80%',
+    maxWidth: '85%',
   },
   circular: {
-    width: 12,
-    height: 12,
-    borderColor: '#55BCF6',
-    borderWidth: 2,
+    width: 22,
+    height: 22,
+    marginRight: 5,
     borderRadius: 5,
+    borderWidth: 2.5,
+    borderColor: '#55BCF6',
   },
 });
 
