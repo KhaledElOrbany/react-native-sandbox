@@ -44,7 +44,10 @@ export default function App() {
   }, []);
 
   const completeOrder = async (index) => {
-    // here
+    const updatedOrders = [...orders];
+    updatedOrders[index].order_status_id = 2;
+    setOrders(updatedOrders);
+    await AsyncStorage.setItem('orders', JSON.stringify(updatedOrders));
   };
 
   return (
