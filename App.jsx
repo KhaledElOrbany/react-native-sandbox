@@ -35,7 +35,10 @@ export default function App() {
 
   useEffect(() => {
     const getOrders = async () => {
-      if (await AsyncStorage.getItem('orders')) {
+      const _orders = await AsyncStorage.getItem('orders');
+      if (_orders) {
+        setOrders(JSON.parse(_orders));
+      } else {
         await AsyncStorage.setItem('orders', JSON.stringify(tempOrders));
         setOrders(tempOrders);
       }
