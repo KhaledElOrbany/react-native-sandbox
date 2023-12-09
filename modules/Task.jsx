@@ -3,16 +3,17 @@ import { View, Text, StyleSheet } from 'react-native';
 
 const Task = ({ item }) => {
   const { id, name, order_status_id, trip_id } = item;
+
   return (
     <View style={styles.item}>
       <View style={styles.itemLeft}>
         <View style={styles.square} />
         <Text>
-          <Text>
+          <Text style={order_status_id === 2 ? styles.textDone : {}}>
             Trip: {trip_id} | Order: {id}
           </Text>
           <Text>{'\n'}</Text>
-          <Text>
+          <Text style={order_status_id === 2 ? styles.textDone : {}}>
             Status: {name} | Order Num: {order_status_id}
           </Text>
         </Text>
@@ -54,6 +55,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 2.5,
     borderColor: '#55BCF6',
+  },
+  textDone: {
+    textDecorationLine: 'line-through',
   },
   doneCircular: {
     width: 22,
