@@ -7,7 +7,7 @@ const Task = ({ item }) => {
     <View style={styles.item}>
       <View style={styles.itemLeft}>
         <View style={styles.square} />
-        <Text style={styles.itemText}>
+        <Text>
           <Text>
             Trip: {trip_id} | Order: {id}
           </Text>
@@ -17,7 +17,9 @@ const Task = ({ item }) => {
           </Text>
         </Text>
       </View>
-      <View style={styles.circular} />
+      <View
+        style={order_status_id === 2 ? styles.doneCircular : styles.circular}
+      />
     </View>
   );
 };
@@ -38,15 +40,12 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   square: {
-    width: 24,
-    height: 24,
-    opacity: 0.4,
+    width: 12,
+    height: 12,
+    opacity: 0.5,
     marginRight: 15,
-    borderRadius: 5,
-    backgroundColor: '#55BCF6',
-  },
-  itemText: {
-    maxWidth: '85%',
+    borderRadius: 24,
+    backgroundColor: '#000',
   },
   circular: {
     width: 22,
@@ -55,6 +54,15 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 2.5,
     borderColor: '#55BCF6',
+  },
+  doneCircular: {
+    width: 22,
+    height: 22,
+    marginRight: 5,
+    borderRadius: 5,
+    borderWidth: 2.5,
+    borderColor: '#55BCF6',
+    backgroundColor: '#55BCF6',
   },
 });
 
