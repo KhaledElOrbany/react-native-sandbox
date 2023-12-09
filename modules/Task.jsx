@@ -5,15 +5,16 @@ const Task = ({ item }) => {
   const { id, name, order_status_id, trip_id } = item;
 
   return (
-    <View style={styles.item}>
+    <View
+      style={[styles.item, order_status_id === 2 ? styles.disabledItem : null]}>
       <View style={styles.itemLeft}>
         <View style={styles.square} />
         <Text>
-          <Text style={order_status_id === 2 ? styles.textDone : {}}>
+          <Text>
             Trip: {trip_id} | Order: {id}
           </Text>
           <Text>{'\n'}</Text>
-          <Text style={order_status_id === 2 ? styles.textDone : {}}>
+          <Text>
             Status: {name} | Order Num: {order_status_id}
           </Text>
         </Text>
@@ -35,6 +36,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 20,
   },
+  disabledItem: {
+    opacity: 0.7,
+  },
   itemLeft: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -55,9 +59,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 2.5,
     borderColor: '#55BCF6',
-  },
-  textDone: {
-    textDecorationLine: 'line-through',
   },
   doneCircular: {
     width: 22,

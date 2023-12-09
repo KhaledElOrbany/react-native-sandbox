@@ -65,6 +65,7 @@ export default function App() {
               return (
                 <TouchableOpacity
                   key={index}
+                  disabled={item.order_status_id === 2}
                   onPress={() => completeOrder(index)}>
                   <Task item={item} />
                 </TouchableOpacity>
