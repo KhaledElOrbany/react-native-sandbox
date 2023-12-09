@@ -29,12 +29,12 @@ const Task = ({ item }) => {
 const styles = StyleSheet.create({
   item: {
     backgroundColor: '#FFF',
-    padding: 15,
+    padding: 10,
     borderRadius: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 20,
+    marginBottom: 5,
   },
   disabledItem: {
     opacity: 0.7,
